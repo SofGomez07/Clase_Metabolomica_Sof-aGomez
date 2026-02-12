@@ -13,4 +13,4 @@ RecaudacionMundial = c(41000000,41400000,728000000,714000000,20000000,29900000,3
 
 cine = data.frame(Pelicula,"Premios Oscar 2025" = PremiosOscar2025,"Mes de estreno"=MesEstreno,
                   "Recaudación mundial (estimada)"=RecaudacionMundial)
-table(cine)
+View(cine)
