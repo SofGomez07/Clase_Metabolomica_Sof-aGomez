@@ -1,0 +1,40 @@
+#ejercicio 2ddct
+
+library("pacman")
+
+p_load("ggplot2","dplyr","vroom") #ggplot = graficas, dplyr = manejo de datos, vroom = llamar repositorios
+
+datos_PCR  =vroom(file="https://raw.githubusercontent.com/ManuelLaraMVZ/resultados_PCR_practica/refs/heads/main/Genes.csv")
+
+datos_PCR
+
+gen_ref = datos_PCR %>% 
+  filter(Gen =="B-actina") %>% 
+  select(-1)
+gen_ref
+
+gen_interes = datos_PCR %>% 
+  filter(Gen !="B-actina") %>% 
+  select(-1)
+gen_interes
+
+DCT = gen_interes %>% 
+  mutate(DC1 = C1- gen_ref$C1,
+         DC2 = C2- gen_ref$C2,
+         DC3 = C3- gen_ref$C3,
+         DT1 = T1- gen_ref$T1,
+         DT2 = T2- gen_ref$T2,
+         DT3 = T3- gen_ref$T3,) %>% 
+  select(-1:-6)
+
+DCT
+
+DCT2 = DCT %>% 
+  mutate(DCT2C1 = 2^(-DC1),
+         DCT2C2 = 2^(-DC2),
+         DCT2C3 = 2^(-DC3),
+         DCT2T1 = 2^(-DT1),
+         DCT2T2 = 2^(-DT2),
+         DCT2T3 = 2^(-DT3),) %>% 
+  select(-1:-6)
+DCT2
