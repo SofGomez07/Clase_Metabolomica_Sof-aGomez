@@ -1,0 +1,22 @@
+install.packages("pacman")
+
+library("pacman")
+
+p_load("ggplot2","dplyr","vroom") #ggplot = graficas, dplyr = manejo de datos, vroom = llamar repositorios
+
+datos_curva = vroom(file="https://raw.githubusercontent.com/ManuelLaraMVZ/resultados_PCR_practica/refs/heads/main/Amplif_grupo1_17022025.csv")
+
+head(datos_curva)
+
+curva_1 = datos_curva %>% #el nuevo objeto va a tener una asignación a partir de la base de datos
+  
+  select(1,7)
+curva_1
+
+grafica_curva = ggplot(curva_1, mappin = aes(x=Cycle,y=F1)) + geom_point() + geom_line(color = "red", linewidth = 0.7)
+grafica_curva
+
+grafica_curva_2 = grafica_curva + labs(x="Ciclos",y="Fluorescencia", title = "Gráfica F1",
+                                       subtitle = "Creado por: Sofía G",caption = "Ejercicio 3")+
+  theme_classic()
+grafica_curva_2
